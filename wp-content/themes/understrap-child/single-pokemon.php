@@ -10,15 +10,6 @@ defined( 'ABSPATH' ) || exit;
 
 get_header();
 
-$PokeAPI = new PokeAPI();
-$pokemon_data = $PokeAPI->get_pokemon(25);
-echo "<pre>";
-//var_dump($pokemon_data->moves);
-foreach($pokemon_data->moves as $move) {
-	var_dump($move);
-}
-echo "</pre>";
-
 $container = get_theme_mod( 'understrap_container_type' );
 ?>
 

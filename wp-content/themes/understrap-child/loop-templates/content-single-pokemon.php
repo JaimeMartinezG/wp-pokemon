@@ -20,8 +20,13 @@ defined( 'ABSPATH' ) || exit;
 				<?php
 				the_title( '<h1 class="entry-title">', '</h1>' ); 
 				the_content( );
-				the_terms( get_the_ID(), 'type', __('Type', 'pokemon') . ': ', ' | ', '' );
 				?>
+				<div class="tems tax_type">
+					<?php the_terms( get_the_ID(), 'type', __( 'Type', 'pokemon' ) . ': ', ' | ', '' ); ?>
+				</div>
+				<div class="terms tax_color">
+					<?php the_terms( get_the_ID(), 'color', __( 'Color', 'pokemon' ) . ': ', ' | ', '' ); ?>
+				</div>
 				<div class="pokedex_id">
 					<?php
 					Pokemon_Helper::the_pokedex_id(get_the_ID());
