@@ -11,6 +11,7 @@ require 'classes/custom-post-type.php';
 require 'classes/helper.php';
 require 'classes/ajax.php';
 require 'classes/poke-api.php';
+require 'classes/api.php';
 
 class Pokemons {
     public function __construct() {

@@ -31,7 +31,7 @@ class Pokemon_CPT {
                 $this->taxonomy_type,
                 $this->taxonomy_color
             ],
-            'show_in_rest'  => true
+            'show_in_rest'  => false
         ];
 
         register_post_type( $this->cpt, $args );
