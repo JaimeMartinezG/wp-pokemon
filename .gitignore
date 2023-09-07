@@ -1,1 +1,5 @@
-/wp-*.php
+/*
+!installer.php
+!/*.daf
+!wp-content/
+!.gitignore
