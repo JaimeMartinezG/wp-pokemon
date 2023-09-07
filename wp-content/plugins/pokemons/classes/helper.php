@@ -214,4 +214,38 @@ class Pokemon_Helper {
 
         return false;
     }
+
+    public static function create_select( array $items, array $args = [], $return = false ) {
+        $default_id = uniqid('select_');
+        $defaults = [
+            'name'      => $default_id,
+            'id'        => $default_id,
+            'default'   => __( 'Select one option', 'pokemon' ),
+            'class'     => []
+        ];
+
+        $attributes = shortcode_atts( $defaults, $args );
+
+        $options = [];
+        foreach( $items as $item ) {
+            if(is_array( $item )) {
+                $options[array_key_first( $item )] = $item[array_key_first( $item )];
+            } else {
+                $options[$item] = self::humanize_pokemon_name( $item );
+            }
+        }
+        
+        $html = '<select name="' . $attributes['name'] . '" id="' . $attributes['id'] . '" class="' . implode( ' ', $attributes['class'] ) . '">';
+        $html .=    '<option value="">' . $defaults['default'] . '</option>';
+        foreach( $options as $value => $text ) {
+            $html .= '<option value="' . $value . '">' . $text . '</option>';
+        }
+        $html .= '</select>';
+
+        if( $return ) {
+            return $html;
+        } else {
+            echo $html;            
+        }
+    }
 }

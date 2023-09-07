@@ -38,6 +38,30 @@ class PokeAPI {
 
         return $data;
     }
+
+    public function get_type_list( array $params = [] ) {
+        $data = [
+            'resource'      => 'type',
+            'resource_id'   => 'list',
+            'data'          => null
+        ];
+
+        if( $this->check_object_cache( $data['resource'], $data['resource_id'] ) ) {
+
+            $type_list = $this->get_object_cache( $data );
+
+        } else {
+            
+            $type_list = $this->do_request( $data['resource'], $data['resource_id'], $params );
+            $data['data'] = $type_list;
+
+            $this->set_object_cache( $data );
+        }
+
+        return json_decode( $type_list );
+
+    }
+
     public function get_pokemon( $pokemon_id ) {
         $data =  [
             'resource'      => 'pokemon',

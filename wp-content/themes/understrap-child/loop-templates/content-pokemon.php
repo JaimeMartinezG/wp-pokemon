@@ -9,32 +9,31 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
+<article <?php post_class( ['g-col-4'] ); ?> id="post-<?php the_ID(); ?>">
+	<div class="card">
+		<div class="card-body">
+			<?php 
+			echo sprintf( '<a href="%s" rel="bookmark">%s</a>', esc_url( get_permalink() ), get_the_post_thumbnail( $post->ID, [350, 'auto'], [
+				'class'	=> 'card-img-top'
+			] ) );
+			//echo get_the_post_thumbnail( $post->ID, [350, 'auto'] ); 
 
-	<header class="entry-header">
+			understrap_link_pages();
+			?>
 
-		<?php
-		the_title(
-			sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ),
-			'</a></h2>'
-		);
-		?>
-	</header><!-- .entry-header -->
+		</div><!-- .entry-content -->
 
-	<div class="entry-content">
-		<?php 
-		echo sprintf( '<a href="%s" rel="bookmark">%s</a>', esc_url( get_permalink() ), get_the_post_thumbnail( $post->ID, [350, 'auto'] ) );
-		//echo get_the_post_thumbnail( $post->ID, [350, 'auto'] ); 
+		<footer class="card-footer">
+			<?php
+			the_title(
+				sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ),
+				'</a></h2>'
+			);
+			
+			understrap_entry_footer(); 
+			
+			?>
 
-		understrap_link_pages();
-		?>
-
-	</div><!-- .entry-content -->
-
-	<footer class="entry-footer">
-
-		<?php understrap_entry_footer(); ?>
-
-	</footer><!-- .entry-footer -->
-
+		</footer><!-- .entry-footer -->
+	</div>
 </article><!-- #post-<?php the_ID(); ?> -->

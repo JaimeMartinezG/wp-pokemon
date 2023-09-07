@@ -30,4 +30,28 @@ jQuery(function($) {
             });
         }
     };
+
+    //The pokemon filter for Archive page
+    // Event
+    const select = document.getElementById('filter_by_type');
+    select.addEventListener( 'change', ( el ) => {
+        el.preventDefault();
+
+        var theValue = el.target.value;
+
+        const items = document.querySelectorAll( 'article.type-pokemon' );
+        if( items ) {
+            items.forEach( ( el ) => {
+                if( !theValue || theValue === '' ) {
+                    el.hidden = false;
+                } else if( !el.classList.contains( 'type-' + theValue ) ) {
+                    el.hidden = true;
+                } else {
+                    el.hidden = false;
+                }
+            } );
+        }
+        
+    } );
+
 });

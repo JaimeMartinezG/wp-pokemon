@@ -18,7 +18,28 @@ $container = get_theme_mod( 'understrap_container_type' );
 <div class="wrapper" id="archive-wrapper">
 
 	<div class="<?php echo esc_attr( $container ); ?>" id="content" tabindex="-1">
+		<div id="search" class="row">
+			<div class="col"></div>
+			<div class="col">
+				<label class="col"><?php _e( 'Filter', 'pokemon' ); ?></label>
+				<?php
+				$pokeAPI = new PokeAPI();
+				$filter_from_poke_api = $pokeAPI->get_type_list( ['limit' => 5]);
+				$items_for_select = array_map( function( $el ) {
+					return [$el->name => Pokemon_Helper::humanize_pokemon_name( $el->name )];
+				}, $filter_from_poke_api->results );
 
+				Pokemon_Helper::create_select( $items_for_select, [
+					'name'		=> 'filter_by_type',
+					'id'		=> 'filter_by_type',
+					'default'	=> __( 'Select one type', 'pokemon' ),
+					'class'		=> [
+						'form-select'
+					]
+				] );
+				?>
+			</div>
+		</div>
 		<div class="row">
 
 			<?php
@@ -40,7 +61,7 @@ $container = get_theme_mod( 'understrap_container_type' );
 					<?php
 					// Start the loop.
 					?>
-					<div class="row row-cols-3">
+					<div class="row row-cols-3" style="--bs-gutter-y: 1.5rem;">
 						<?php
 						while ( have_posts() ) {
 							the_post();
